@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import logout, login
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render, get_object_or_404
@@ -5,9 +6,14 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
 from django.db.models import Q
 
+
 from .forms import *
 from .models import *
 from .utils import DataMixin
+
+
+def error_404(request, exception):
+    return render(request, '404.html')
 
 
 class Bloglist(ListView):
@@ -127,6 +133,7 @@ class UserProfile(TemplateView):
         return context
 
 
+@login_required # только авторизованным пользовавтелям
 def addpage(request):
     if request.method == 'GET':
         form = AddPageForm(request.GET)
@@ -140,6 +147,11 @@ def addpage(request):
     else:
         form = AddPageForm()
     return render(request, 'add_page.html', {'form': form})
+
+
+
+
+
 
 
 

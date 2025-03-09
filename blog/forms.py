@@ -32,8 +32,8 @@ class AddPageForm(forms.Form):
 
     title = forms.CharField(max_length=255, label="Заголовок",widget=forms.TextInput(attrs={'class': 'form-input'}))
     body = forms.CharField(widget=forms.Textarea(attrs={'cols': 33, 'rows': 7,'class': 'form-input'}), label="Текст")
-    author = forms.ModelChoiceField(queryset=User.objects.filter(), label='Автор')
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), label="Категория", empty_label="Категория не выбрана")
+    author = forms.ModelChoiceField(queryset=User.objects.all())
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), label="Категория", empty_label="Не выбрана")
 
     # ---- Связка с моделю существующей, только надо в классе вместо form.Form написать form.ModelForm ----
     # -----------------------------------------------------------------------------------------------------

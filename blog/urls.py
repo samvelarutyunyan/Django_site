@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.urls import path
+from django.conf.urls import handler404
 
 from .views import *
 
